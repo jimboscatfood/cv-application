@@ -1,6 +1,10 @@
 import Section from "./Section";
 
-export default function FullForm({ handleGeneralInfoAdd }) {
+export default function FullForm({
+  handleGeneralInfoAdd,
+  handleEducationInfoAdd,
+  handlePracticalInfoAdd,
+}) {
   const sections = [
     {
       sectionName: "General Information",
@@ -56,8 +60,16 @@ export default function FullForm({ handleGeneralInfoAdd }) {
         className="general"
         handleSubmit={handleGeneralInfoAdd}
       />
-      <Section sectionInfo={sections[1]} className="education" />
-      <Section sectionInfo={sections[2]} className="practical" />
+      <Section
+        sectionInfo={sections[1]}
+        className="education"
+        handleSubmit={handleEducationInfoAdd}
+      />
+      <Section
+        sectionInfo={sections[2]}
+        className="practical"
+        handleSubmit={handlePracticalInfoAdd}
+      />
     </>
   );
 }
