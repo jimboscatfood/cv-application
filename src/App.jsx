@@ -11,7 +11,7 @@ const practicalTextarea = document.querySelector("section.practical textarea");
 
 function App() {
   const [generalInfo, setGeneralInfo] = useState({
-    name: "",
+    username: "",
     email: "",
     phone: "",
   });
@@ -29,14 +29,17 @@ function App() {
     endDate: "",
   });
 
-  function handleGeneralInfoAdd() {
-    const nameValue = generalInputs[0].value;
-    const emailValue = generalInputs[1].value;
-    const phoneValue = generalInputs[2].value;
-    setGeneralInfo({ name: nameValue, email: emailValue, phone: phoneValue });
+  const [generalInfoEntries, setGeneralInfoEntries] = useState([]);
+  const [educationInfoEntries, setEducationInfoEntries] = useState([]);
+  const [practicalInfoEntries, setPracticalInfoEntries] = useState([]);
+
+  function handleGeneralInfoChange(e) {
+    console.log(generalInfo);
+    const { name, value } = e.target;
+    setGeneralInfo({ ...generalInfo, [name]: value });
   }
 
-  function handleEducationInfoAdd() {
+  function handleEducationInfoChange() {
     const schoolValue = educationalInputs[0].value;
     const titleValue = educationalInputs[1].value;
     const startDateValue = educationalInputs[2].value;
@@ -49,7 +52,7 @@ function App() {
     });
   }
 
-  function handlePracticalInfoAdd() {
+  function handlePracticalInfoChange() {
     const companyValue = practicalInputs[0].value;
     const positionValue = practicalInputs[1].value;
     const responsibilityValue = practicalTextarea.value;
@@ -64,17 +67,30 @@ function App() {
     });
   }
 
+  function handleGeneralInfoAdd() {
+    setGeneralInfoEntries([...generalInfoEntries, generalInfo]);
+  }
+  function handleEducationInfoAdd() {
+    setEducationInfoEntries([...educationInfoEntries, educationInfo]);
+  }
+  function handlePracticalInfoAdd() {
+    setPracticalInfoEntries([...practicalInfoEntries, practicalInfo]);
+  }
+
   return (
     <>
       <FullForm
+        handleGeneralInfoChange={(e) => handleGeneralInfoChange(e)}
+        handleEducationInfoChange={() => handleEducationInfoChange()}
+        handlePracticalInfoChange={() => handlePracticalInfoChange()}
         handleGeneralInfoAdd={() => handleGeneralInfoAdd()}
         handleEducationInfoAdd={() => handleEducationInfoAdd()}
         handlePracticalInfoAdd={() => handlePracticalInfoAdd()}
       />
       <Preview
-        generalInfo={generalInfo}
-        educationInfo={educationInfo}
-        practicalInfo={practicalInfo}
+        generalInfoEntries={generalInfoEntries}
+        educationInfoEntries={educationInfoEntries}
+        practicalInfoEntries={practicalInfoEntries}
       />
     </>
   );

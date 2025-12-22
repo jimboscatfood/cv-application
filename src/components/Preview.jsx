@@ -1,19 +1,29 @@
-export default function Preview({ generalInfo, educationInfo, practicalInfo }) {
+export default function Preview({
+  generalInfoEntries,
+  educationInfoEntries,
+  practicalInfoEntries,
+}) {
   return (
-    <div>
-      <Header generalInfo={generalInfo} />
-      <Education educationInfo={educationInfo} />
-      <Practical practicalInfo={practicalInfo} />
+    <div className="preview">
+      <Header generalInfoEntries={generalInfoEntries} />
+      <Education educationInfo={educationInfoEntries} />
+      <Practical practicalInfo={practicalInfoEntries} />
     </div>
   );
 }
 
-function Header({ generalInfo }) {
+function Header({ generalInfoEntries }) {
   return (
     <div className="cv-header">
-      <h1 className="name">{generalInfo.name}</h1>
-      <h3 className="email">{generalInfo.email}</h3>
-      <h3 className="phone">{generalInfo.phone}</h3>
+      <h1 className="name">
+        {generalInfoEntries[0] && generalInfoEntries[0].username}
+      </h1>
+      <h3 className="email">
+        {generalInfoEntries[0] && generalInfoEntries[0].email}
+      </h3>
+      <h3 className="phone">
+        {generalInfoEntries[0] && generalInfoEntries[0].phone}
+      </h3>
     </div>
   );
 }
