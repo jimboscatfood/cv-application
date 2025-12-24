@@ -4,11 +4,6 @@ import "./App.css";
 import FullForm from "./components/FullForm";
 import Preview from "./components/Preview";
 
-const generalInputs = document.querySelectorAll("section.general input");
-const educationalInputs = document.querySelectorAll("section.education input");
-const practicalInputs = document.querySelectorAll("section.practical input");
-const practicalTextarea = document.querySelector("section.practical textarea");
-
 function App() {
   const [generalInfo, setGeneralInfo] = useState({
     username: "",
@@ -34,37 +29,18 @@ function App() {
   const [practicalInfoEntries, setPracticalInfoEntries] = useState([]);
 
   function handleGeneralInfoChange(e) {
-    console.log(generalInfo);
     const { name, value } = e.target;
     setGeneralInfo({ ...generalInfo, [name]: value });
   }
 
-  function handleEducationInfoChange() {
-    const schoolValue = educationalInputs[0].value;
-    const titleValue = educationalInputs[1].value;
-    const startDateValue = educationalInputs[2].value;
-    const endDateValue = educationalInputs[3].value;
-    setEducationInfo({
-      school: schoolValue,
-      titleOfStudy: titleValue,
-      startDate: startDateValue,
-      endDate: endDateValue,
-    });
+  function handleEducationInfoChange(e) {
+    const { name, value } = e.target;
+    setEducationInfo({ ...educationInfo, [name]: value });
   }
 
-  function handlePracticalInfoChange() {
-    const companyValue = practicalInputs[0].value;
-    const positionValue = practicalInputs[1].value;
-    const responsibilityValue = practicalTextarea.value;
-    const startDateValue = practicalInputs[2].value;
-    const endDateValue = practicalInputs[3].value;
-    setPracticalInfo({
-      company: companyValue,
-      position: positionValue,
-      responsibility: responsibilityValue,
-      startDate: startDateValue,
-      endDate: endDateValue,
-    });
+  function handlePracticalInfoChange(e) {
+    const { name, value } = e.target;
+    setPracticalInfo({ ...practicalInfo, [name]: value });
   }
 
   function handleGeneralInfoAdd() {
@@ -81,8 +57,8 @@ function App() {
     <>
       <FullForm
         handleGeneralInfoChange={(e) => handleGeneralInfoChange(e)}
-        handleEducationInfoChange={() => handleEducationInfoChange()}
-        handlePracticalInfoChange={() => handlePracticalInfoChange()}
+        handleEducationInfoChange={(e) => handleEducationInfoChange(e)}
+        handlePracticalInfoChange={(e) => handlePracticalInfoChange(e)}
         handleGeneralInfoAdd={() => handleGeneralInfoAdd()}
         handleEducationInfoAdd={() => handleEducationInfoAdd()}
         handlePracticalInfoAdd={() => handlePracticalInfoAdd()}
