@@ -7,6 +7,9 @@ export default function FullForm({
   handleGeneralInfoChange,
   handleEducationInfoChange,
   handlePracticalInfoChange,
+  generalInfoEntries,
+  educationInfoEntries,
+  practicalInfoEntries,
 }) {
   const sections = [
     {
@@ -73,18 +76,21 @@ export default function FullForm({
         className="general"
         handleSubmit={handleGeneralInfoAdd}
         handleChange={handleGeneralInfoChange}
+        infoEntries={generalInfoEntries}
       />
       <Section
         sectionInfo={sections[1]}
         className="education"
         handleSubmit={handleEducationInfoAdd}
         handleChange={handleEducationInfoChange}
+        infoEntries={educationInfoEntries}
       />
       <Section
         sectionInfo={sections[2]}
         className="practical"
         handleSubmit={handlePracticalInfoAdd}
         handleChange={handlePracticalInfoChange}
+        infoEntries={practicalInfoEntries}
       />
     </div>
   );

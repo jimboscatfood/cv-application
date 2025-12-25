@@ -62,6 +62,9 @@ function App() {
         handleGeneralInfoAdd={() => handleGeneralInfoAdd()}
         handleEducationInfoAdd={() => handleEducationInfoAdd()}
         handlePracticalInfoAdd={() => handlePracticalInfoAdd()}
+        generalInfoEntries={generalInfoEntries}
+        educationInfoEntries={educationInfoEntries}
+        practicalInfoEntries={practicalInfoEntries}
       />
       <Preview
         generalInfoEntries={generalInfoEntries}
