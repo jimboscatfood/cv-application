@@ -33,6 +33,14 @@ function App() {
   const [educationCounter, setEducationCounter] = useState(0);
   const [practicalCounter, setPracticalCounter] = useState(0);
 
+  const [generalEditMode, setGeneralEditMode] = useState(false);
+  const [educationEditMode, setEducationEditMode] = useState(false);
+  const [practicalEditMode, setPracticalEditMode] = useState(false);
+
+  const [generalEditId, setGeneralEditId] = useState(null);
+  const [educationEditId, setEducationEditId] = useState(null);
+  const [practicalEditId, setPracticalEditId] = useState(null);
+
   function handleGeneralInfoChange(e) {
     const { name, value } = e.target;
     setGeneralInfo({ ...generalInfo, [name]: value });
@@ -49,31 +57,63 @@ function App() {
   }
 
   function handleGeneralInfoAdd() {
-    setGeneralInfoEntries([
-      ...generalInfoEntries,
-      { ...generalInfo, id: `G-${generalCounter}` },
-    ]);
-    setGeneralCounter(generalCounter + 1);
+    if (generalEditMode === false) {
+      setGeneralInfoEntries([
+        ...generalInfoEntries,
+        { ...generalInfo, id: `G-${generalCounter}` },
+      ]);
+      setGeneralCounter(generalCounter + 1);
+    } else {
+      const updatedEntries = generalInfoEntries.map((entry) => {
+        if (entry.id === generalEditId) {
+          return { ...generalInfo, id: entry.id };
+        }
+        return entry;
+      });
+      setGeneralInfoEntries(updatedEntries);
+    }
     const generalInputs = document.querySelectorAll("section.general input");
     generalInputs.forEach((input) => (input.value = ""));
+    setGeneralEditMode(false);
   }
   function handleEducationInfoAdd() {
-    setEducationInfoEntries([
-      ...educationInfoEntries,
-      { ...educationInfo, id: `E-${educationCounter}` },
-    ]);
-    setEducationCounter(educationCounter + 1);
+    if (educationEditMode === false) {
+      setEducationInfoEntries([
+        ...educationInfoEntries,
+        { ...educationInfo, id: `E-${educationCounter}` },
+      ]);
+      setEducationCounter(educationCounter + 1);
+    } else {
+      const updatedEntries = educationInfoEntries.map((entry) => {
+        if (entry.id === educationEditId) {
+          return { ...educationInfo, id: entry.id };
+        }
+        return entry;
+      });
+      setEducationInfoEntries(updatedEntries);
+    }
     const educationInputs = document.querySelectorAll(
       "section.education input"
     );
     educationInputs.forEach((input) => (input.value = ""));
+    setEducationEditMode(false);
   }
   function handlePracticalInfoAdd() {
-    setPracticalInfoEntries([
-      ...practicalInfoEntries,
-      { ...practicalInfo, id: `P-${practicalCounter}` },
-    ]);
-    setPracticalCounter(practicalCounter + 1);
+    if (practicalEditMode === false) {
+      setPracticalInfoEntries([
+        ...practicalInfoEntries,
+        { ...practicalInfo, id: `P-${practicalCounter}` },
+      ]);
+      setPracticalCounter(practicalCounter + 1);
+    } else {
+      const updatedEntries = practicalInfoEntries.map((entry) => {
+        if (entry.id === practicalEditId) {
+          return { ...practicalInfo, id: entry.id };
+        }
+        return entry;
+      });
+      setPracticalInfoEntries(updatedEntries);
+    }
     const practicalInputs = document.querySelectorAll(
       "section.practical input"
     );
@@ -82,11 +122,14 @@ function App() {
       "section.practical textarea"
     );
     practicalTextarea.value = "";
+    setPracticalEditMode(false);
   }
 
   function handleEdit(e) {
     const targetID = e.currentTarget.parentNode.id;
     if (targetID.includes("G")) {
+      setGeneralEditMode(true);
+      setGeneralEditId(targetID);
       const selectedEntry = generalInfoEntries.find(
         (entry) => entry.id === targetID
       );
@@ -95,6 +138,8 @@ function App() {
       generalInputs[1].value = selectedEntry.email;
       generalInputs[2].value = selectedEntry.phone;
     } else if (targetID.includes("E")) {
+      setEducationEditMode(true);
+      setEducationEditId(targetID);
       const selectedEntry = educationInfoEntries.find(
         (entry) => entry.id === targetID
       );
@@ -106,6 +151,8 @@ function App() {
       educationInputs[2].value = selectedEntry.startDate;
       educationInputs[3].value = selectedEntry.endDate;
     } else if (targetID.includes("P")) {
+      setPracticalEditMode(true);
+      setPracticalEditId(targetID);
       const selectedEntry = practicalInfoEntries.find(
         (entry) => entry.id === targetID
       );
