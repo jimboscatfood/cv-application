@@ -15,15 +15,14 @@ export default function Preview({
 function Header({ generalInfoEntries }) {
   return (
     <div className="cv-header">
-      <h1 className="username">
-        {generalInfoEntries[0] && generalInfoEntries[0].username}
-      </h1>
-      <h3 className="email">
-        {generalInfoEntries[0] && generalInfoEntries[0].email}
-      </h3>
-      <h3 className="phone">
-        {generalInfoEntries[0] && generalInfoEntries[0].phone}
-      </h3>
+      {generalInfoEntries.length > 0 &&
+        generalInfoEntries.map((entry) => (
+          <div className="user-info" key={entry.id}>
+            <h1 className="username">{entry.username}</h1>
+            <h3 className="email">{entry.email}</h3>
+            <h3 className="phone">{entry.phone}</h3>
+          </div>
+        ))}
     </div>
   );
 }
