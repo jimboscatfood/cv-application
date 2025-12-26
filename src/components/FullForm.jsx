@@ -7,6 +7,7 @@ export default function FullForm({
   handleGeneralInfoChange,
   handleEducationInfoChange,
   handlePracticalInfoChange,
+  handleEdit,
   generalInfoEntries,
   educationInfoEntries,
   practicalInfoEntries,
@@ -76,6 +77,7 @@ export default function FullForm({
         className="general"
         handleSubmit={handleGeneralInfoAdd}
         handleChange={handleGeneralInfoChange}
+        handleEdit={handleEdit}
         infoEntries={generalInfoEntries}
       />
       <Section
@@ -83,6 +85,7 @@ export default function FullForm({
         className="education"
         handleSubmit={handleEducationInfoAdd}
         handleChange={handleEducationInfoChange}
+        handleEdit={handleEdit}
         infoEntries={educationInfoEntries}
       />
       <Section
@@ -90,6 +93,7 @@ export default function FullForm({
         className="practical"
         handleSubmit={handlePracticalInfoAdd}
         handleChange={handlePracticalInfoChange}
+        handleEdit={handleEdit}
         infoEntries={practicalInfoEntries}
       />
     </div>

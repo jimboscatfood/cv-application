@@ -84,6 +84,45 @@ function App() {
     practicalTextarea.value = "";
   }
 
+  function handleEdit(e) {
+    const targetID = e.currentTarget.parentNode.id;
+    if (targetID.includes("G")) {
+      const selectedEntry = generalInfoEntries.find(
+        (entry) => entry.id === targetID
+      );
+      const generalInputs = document.querySelectorAll("section.general input");
+      generalInputs[0].value = selectedEntry.username;
+      generalInputs[1].value = selectedEntry.email;
+      generalInputs[2].value = selectedEntry.phone;
+    } else if (targetID.includes("E")) {
+      const selectedEntry = educationInfoEntries.find(
+        (entry) => entry.id === targetID
+      );
+      const educationInputs = document.querySelectorAll(
+        "section.education input"
+      );
+      educationInputs[0].value = selectedEntry.school;
+      educationInputs[1].value = selectedEntry.titleOfStudy;
+      educationInputs[2].value = selectedEntry.startDate;
+      educationInputs[3].value = selectedEntry.endDate;
+    } else if (targetID.includes("P")) {
+      const selectedEntry = practicalInfoEntries.find(
+        (entry) => entry.id === targetID
+      );
+      const practicalInputs = document.querySelectorAll(
+        "section.practical input"
+      );
+      const practicalTextarea = document.querySelector(
+        "section.practical textarea"
+      );
+      practicalInputs[0].value = selectedEntry.company;
+      practicalInputs[1].value = selectedEntry.position;
+      practicalTextarea.value = selectedEntry.responsibility;
+      practicalInputs[2].value = selectedEntry.startDate;
+      practicalInputs[3].value = selectedEntry.endDate;
+    }
+  }
+
   return (
     <>
       <FullForm
@@ -96,6 +135,7 @@ function App() {
         generalInfoEntries={generalInfoEntries}
         educationInfoEntries={educationInfoEntries}
         practicalInfoEntries={practicalInfoEntries}
+        handleEdit={(e) => handleEdit(e)}
       />
       <Preview
         generalInfoEntries={generalInfoEntries}
