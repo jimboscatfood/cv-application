@@ -4,6 +4,7 @@ export default function Section({
   handleSubmit,
   handleChange,
   handleEdit,
+  handleDelete,
   className,
   infoEntries,
 }) {
@@ -11,7 +12,11 @@ export default function Section({
     <section className={className}>
       <h2>{sectionInfo.sectionName}</h2>
       {/* {if there is any existing entry, show them here as a list of entries which they can choose to edit or delete} */}
-      <EntriesList infoEntries={infoEntries} handleEdit={handleEdit} />
+      <EntriesList
+        infoEntries={infoEntries}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+      />
       {/* // based on the prop, create the Input components */}
       {sectionInfo.inputs.map((inputObj) => (
         <Input
@@ -43,16 +48,16 @@ function Input({ label, type, handleChange, name }) {
   );
 }
 
-function EntriesList({ infoEntries, handleEdit }) {
+function EntriesList({ infoEntries, handleEdit, handleDelete }) {
   return (
     <ul className="entries-container">
       {infoEntries.length > 0 &&
         infoEntries.map((entry) => (
           <li key={entry.id} id={entry.id}>
             <h4>{entry.username || entry.school || entry.company}</h4>
-            <h4>{entry.titleOfStudy || entry.position}</h4>
+            <h4>{entry.phone || entry.titleOfStudy || entry.position}</h4>
             <button onClick={handleEdit}>Edit</button>
-            <button>Delete</button>
+            <button onClick={handleDelete}>Delete</button>
           </li>
         ))}
     </ul>

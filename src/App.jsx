@@ -170,6 +170,26 @@ function App() {
     }
   }
 
+  function handleDelete(e) {
+    const targetID = e.currentTarget.parentNode.id;
+    if (targetID.includes("G")) {
+      const updatedArr = generalInfoEntries.filter(
+        (entry) => entry.id !== targetID
+      );
+      setGeneralInfoEntries(updatedArr);
+    } else if (targetID.includes("E")) {
+      const updatedArr = educationInfoEntries.filter(
+        (entry) => entry.id !== targetID
+      );
+      setEducationInfoEntries(updatedArr);
+    } else if (targetID.includes("P")) {
+      const updatedArr = practicalInfoEntries.filter(
+        (entry) => entry.id !== targetID
+      );
+      setPracticalInfoEntries(updatedArr);
+    }
+  }
+
   return (
     <>
       <FullForm
@@ -183,6 +203,7 @@ function App() {
         educationInfoEntries={educationInfoEntries}
         practicalInfoEntries={practicalInfoEntries}
         handleEdit={(e) => handleEdit(e)}
+        handleDelete={(e) => handleDelete(e)}
       />
       <Preview
         generalInfoEntries={generalInfoEntries}
