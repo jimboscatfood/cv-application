@@ -57,20 +57,22 @@ function App() {
   }
 
   function handleGeneralInfoAdd() {
-    if (generalEditMode === false) {
-      setGeneralInfoEntries([
-        ...generalInfoEntries,
-        { ...generalInfo, id: `G-${generalCounter}` },
-      ]);
-      setGeneralCounter(generalCounter + 1);
-    } else {
-      const updatedEntries = generalInfoEntries.map((entry) => {
-        if (entry.id === generalEditId) {
-          return { ...generalInfo, id: entry.id };
-        }
-        return entry;
-      });
-      setGeneralInfoEntries(updatedEntries);
+    if (generalInfo.username !== "") {
+      if (generalEditMode === false) {
+        setGeneralInfoEntries([
+          ...generalInfoEntries,
+          { ...generalInfo, id: `G-${generalCounter}` },
+        ]);
+        setGeneralCounter(generalCounter + 1);
+      } else {
+        const updatedEntries = generalInfoEntries.map((entry) => {
+          if (entry.id === generalEditId) {
+            return { ...generalInfo, id: entry.id };
+          }
+          return entry;
+        });
+        setGeneralInfoEntries(updatedEntries);
+      }
     }
     // reset input value and info state
     const generalInputs = document.querySelectorAll("section.general input");
@@ -83,20 +85,22 @@ function App() {
     setGeneralEditMode(false);
   }
   function handleEducationInfoAdd() {
-    if (educationEditMode === false) {
-      setEducationInfoEntries([
-        ...educationInfoEntries,
-        { ...educationInfo, id: `E-${educationCounter}` },
-      ]);
-      setEducationCounter(educationCounter + 1);
-    } else {
-      const updatedEntries = educationInfoEntries.map((entry) => {
-        if (entry.id === educationEditId) {
-          return { ...educationInfo, id: entry.id };
-        }
-        return entry;
-      });
-      setEducationInfoEntries(updatedEntries);
+    if (educationInfo.school !== "" || educationInfo.titleOfStudy !== "") {
+      if (educationEditMode === false) {
+        setEducationInfoEntries([
+          ...educationInfoEntries,
+          { ...educationInfo, id: `E-${educationCounter}` },
+        ]);
+        setEducationCounter(educationCounter + 1);
+      } else {
+        const updatedEntries = educationInfoEntries.map((entry) => {
+          if (entry.id === educationEditId) {
+            return { ...educationInfo, id: entry.id };
+          }
+          return entry;
+        });
+        setEducationInfoEntries(updatedEntries);
+      }
     }
     const educationInputs = document.querySelectorAll(
       "section.education input"
@@ -111,21 +115,22 @@ function App() {
     setEducationEditMode(false);
   }
   function handlePracticalInfoAdd() {
-    if (practicalEditMode === false) {
-      setPracticalInfoEntries([
-        ...practicalInfoEntries,
-        { ...practicalInfo, id: `P-${practicalCounter}` },
-      ]);
-      setPracticalCounter(practicalCounter + 1);
-    } else {
-      const updatedEntries = practicalInfoEntries.map((entry) => {
-        if (entry.id === practicalEditId) {
-          return { ...practicalInfo, id: entry.id };
-        }
-        return entry;
-      });
-      setPracticalInfoEntries(updatedEntries);
-    }
+    if (practicalInfo.company !== "" || practicalInfo.position !== "")
+      if (practicalEditMode === false) {
+        setPracticalInfoEntries([
+          ...practicalInfoEntries,
+          { ...practicalInfo, id: `P-${practicalCounter}` },
+        ]);
+        setPracticalCounter(practicalCounter + 1);
+      } else {
+        const updatedEntries = practicalInfoEntries.map((entry) => {
+          if (entry.id === practicalEditId) {
+            return { ...practicalInfo, id: entry.id };
+          }
+          return entry;
+        });
+        setPracticalInfoEntries(updatedEntries);
+      }
     const practicalInputs = document.querySelectorAll(
       "section.practical input"
     );
