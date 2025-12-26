@@ -28,6 +28,11 @@ function App() {
   const [educationInfoEntries, setEducationInfoEntries] = useState([]);
   const [practicalInfoEntries, setPracticalInfoEntries] = useState([]);
 
+  // for setting up individual entry id for setting up keys
+  const [generalCounter, setGeneralCounter] = useState(0);
+  const [educationCounter, setEducationCounter] = useState(0);
+  const [practicalCounter, setPracticalCounter] = useState(0);
+
   function handleGeneralInfoChange(e) {
     const { name, value } = e.target;
     setGeneralInfo({ ...generalInfo, [name]: value });
@@ -44,13 +49,39 @@ function App() {
   }
 
   function handleGeneralInfoAdd() {
-    setGeneralInfoEntries([...generalInfoEntries, generalInfo]);
+    setGeneralInfoEntries([
+      ...generalInfoEntries,
+      { ...generalInfo, id: `G-${generalCounter}` },
+    ]);
+    setGeneralCounter(generalCounter + 1);
+    const generalInputs = document.querySelectorAll("section.general input");
+    generalInputs.forEach((input) => (input.value = ""));
   }
   function handleEducationInfoAdd() {
-    setEducationInfoEntries([...educationInfoEntries, educationInfo]);
+    setEducationInfoEntries([
+      ...educationInfoEntries,
+      { ...educationInfo, id: `E-${educationCounter}` },
+    ]);
+    setEducationCounter(educationCounter + 1);
+    const educationInputs = document.querySelectorAll(
+      "section.education input"
+    );
+    educationInputs.forEach((input) => (input.value = ""));
   }
   function handlePracticalInfoAdd() {
-    setPracticalInfoEntries([...practicalInfoEntries, practicalInfo]);
+    setPracticalInfoEntries([
+      ...practicalInfoEntries,
+      { ...practicalInfo, id: `P-${practicalCounter}` },
+    ]);
+    setPracticalCounter(practicalCounter + 1);
+    const practicalInputs = document.querySelectorAll(
+      "section.practical input"
+    );
+    practicalInputs.forEach((input) => (input.value = ""));
+    const practicalTextarea = document.querySelector(
+      "section.practical textarea"
+    );
+    practicalTextarea.value = "";
   }
 
   return (
