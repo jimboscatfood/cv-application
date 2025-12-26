@@ -54,10 +54,21 @@ function EntriesList({ infoEntries, handleEdit, handleDelete }) {
       {infoEntries.length > 0 &&
         infoEntries.map((entry) => (
           <li key={entry.id} id={entry.id}>
-            <h4>{entry.username || entry.school || entry.company}</h4>
-            <h4>{entry.phone || entry.titleOfStudy || entry.position}</h4>
-            <button onClick={handleEdit}>Edit</button>
-            <button onClick={handleDelete}>Delete</button>
+            <h4 className="main-title">
+              {entry.username || entry.school || entry.company}
+            </h4>
+            <h4 className="description">
+              {entry.email ||
+                entry.phone ||
+                entry.titleOfStudy ||
+                entry.position}
+            </h4>
+            <button className="edit" onClick={handleEdit}>
+              Edit
+            </button>
+            <button className="delete" onClick={handleDelete}>
+              Delete
+            </button>
           </li>
         ))}
     </ul>
