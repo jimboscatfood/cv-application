@@ -72,8 +72,14 @@ function App() {
       });
       setGeneralInfoEntries(updatedEntries);
     }
+    // reset input value and info state
     const generalInputs = document.querySelectorAll("section.general input");
     generalInputs.forEach((input) => (input.value = ""));
+    setGeneralInfo({
+      username: "",
+      email: "",
+      phone: "",
+    });
     setGeneralEditMode(false);
   }
   function handleEducationInfoAdd() {
@@ -96,6 +102,12 @@ function App() {
       "section.education input"
     );
     educationInputs.forEach((input) => (input.value = ""));
+    setEducationInfo({
+      school: "",
+      titleOfStudy: "",
+      startDate: "",
+      endDate: "",
+    });
     setEducationEditMode(false);
   }
   function handlePracticalInfoAdd() {
@@ -122,6 +134,13 @@ function App() {
       "section.practical textarea"
     );
     practicalTextarea.value = "";
+    setPracticalInfo({
+      company: "",
+      position: "",
+      responsibility: "",
+      startDate: "",
+      endDate: "",
+    });
     setPracticalEditMode(false);
   }
 
@@ -133,6 +152,7 @@ function App() {
       const selectedEntry = generalInfoEntries.find(
         (entry) => entry.id === targetID
       );
+      setGeneralInfo(selectedEntry);
       const generalInputs = document.querySelectorAll("section.general input");
       generalInputs[0].value = selectedEntry.username;
       generalInputs[1].value = selectedEntry.email;
@@ -143,6 +163,7 @@ function App() {
       const selectedEntry = educationInfoEntries.find(
         (entry) => entry.id === targetID
       );
+      setEducationInfo(selectedEntry);
       const educationInputs = document.querySelectorAll(
         "section.education input"
       );
@@ -156,6 +177,7 @@ function App() {
       const selectedEntry = practicalInfoEntries.find(
         (entry) => entry.id === targetID
       );
+      setPracticalInfo(selectedEntry);
       const practicalInputs = document.querySelectorAll(
         "section.practical input"
       );
