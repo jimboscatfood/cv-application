@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-import "./App.css";
+import "./styles/App.css";
+import "./styles/form.css";
+import "./styles/preview.css";
 import FullForm from "./components/FullForm";
 import Preview from "./components/Preview";
 
@@ -56,6 +58,13 @@ function App() {
     setPracticalInfo({ ...practicalInfo, [name]: value });
   }
 
+  function toggleShowUI() {
+    const generalInputUI = document.querySelector(
+      "section.general > div.user-input"
+    );
+    generalInputUI.classList.add("hide");
+  }
+
   function handleGeneralInfoAdd() {
     if (generalInfo.username !== "") {
       if (generalEditMode === false) {
@@ -73,6 +82,7 @@ function App() {
         });
         setGeneralInfoEntries(updatedEntries);
       }
+      toggleShowUI();
     }
     // reset input value and info state
     const generalInputs = document.querySelectorAll("section.general input");
@@ -152,6 +162,13 @@ function App() {
   function handleEdit(e) {
     const targetID = e.currentTarget.parentNode.id;
     if (targetID.includes("G")) {
+      const generalInputUI = document.querySelector(
+        "section.general > div.user-input"
+      );
+      generalInputUI.classList.add("edit");
+      if (generalInputUI.classList.contains("hide")) {
+        generalInputUI.classList.remove("hide");
+      }
       setGeneralEditMode(true);
       setGeneralEditId(targetID);
       const selectedEntry = generalInfoEntries.find(

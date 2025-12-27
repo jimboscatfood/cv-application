@@ -18,17 +18,19 @@ export default function Section({
         handleDelete={handleDelete}
       />
       {/* // based on the prop, create the Input components */}
-      {sectionInfo.inputs.map((inputObj) => (
-        <Input
-          label={inputObj.inputLabel}
-          type={inputObj.inputType}
-          handleChange={handleChange}
-          name={inputObj.name}
-        />
-      ))}
-      <button className="add" onClick={handleSubmit}>
-        Add
-      </button>
+      <div className="user-input">
+        {sectionInfo.inputs.map((inputObj) => (
+          <Input
+            label={inputObj.inputLabel}
+            type={inputObj.inputType}
+            handleChange={handleChange}
+            name={inputObj.name}
+          />
+        ))}
+        <button className="add" onClick={handleSubmit}>
+          Add
+        </button>
+      </div>
     </section>
   );
 }
