@@ -91,6 +91,6 @@ button.delete {
   font-size: 0.9rem;
 }
 
-.hide {
+section.general > div.user-input.hide {
   display: none;
 }
